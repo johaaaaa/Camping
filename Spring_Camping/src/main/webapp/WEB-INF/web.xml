@@ -38,6 +38,33 @@
 		<url-pattern>/</url-pattern>
 	</servlet-mapping>
 
+ 	<!--dd-->
+	<servlet-mapping>
+	
+	        <servlet-name>default</servlet-name>
+	
+	        <url-pattern>*.js</url-pattern>
+	
+	    </servlet-mapping>
+	
+	    <servlet-mapping>
+	
+	        <servlet-name>default</servlet-name>
+	
+	        <url-pattern>*.css</url-pattern>
+	
+	    </servlet-mapping>
+	
+	    <servlet-mapping>
+	
+	        <servlet-name>default</servlet-name>
+	
+	        <url-pattern>*.jpg</url-pattern>
+	
+	    </servlet-mapping>
+
+	<!--dd-->
+
 	<!-- 인코딩 필터 -->
 	<filter>
 		<filter-name>encodingFilter</filter-name>

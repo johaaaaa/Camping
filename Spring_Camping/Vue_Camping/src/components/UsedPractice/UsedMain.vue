@@ -43,7 +43,7 @@
 
             <div class="used-searchbox">
               <div>
-                <input type="text" name="search" placeholder="어떤 물건을 찾으시나요?" v-model="keyword"
+                <input type="text" name="search" placeholder="어떤 물건을 찾으시나요??" v-model="keyword"
                   @keyup.enter="searchList()">
                 <img v-bind:src="searchImg" @click='searchList'>
               </div>

@@ -40,7 +40,7 @@ import com.siot.IamportRestClient.response.Certification;
 import com.siot.IamportRestClient.response.IamportResponse;
 
 @RestController
-@CrossOrigin(origins = "*")
+@CrossOrigin(origins = "http://localhost:8087")
 @RequestMapping("/java")
 public class MemberController {
 
