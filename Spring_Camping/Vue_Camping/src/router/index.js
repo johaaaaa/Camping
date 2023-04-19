@@ -197,11 +197,6 @@ const routes = [{
     component: () => import('@/components/Camping/StoredCampList.vue'),
   },
   {
-    name: 'UsedChat',
-    path: '/usedChat',
-    component: () => import('@/components/Chat/ChatView.vue'),
-  },
-  {
     name: 'RecruUpdate',
     path: '/recru/RecruUpdate/:recruId',
     component: () => import('@/components/recruit/RecruUpdateView.vue'),
