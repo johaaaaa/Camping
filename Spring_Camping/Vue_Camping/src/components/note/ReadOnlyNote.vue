@@ -36,7 +36,7 @@ export default {
     }
   },
   created() {
-        fetch("http://13.125.95.210:85/java/GoMyNote/" + this.noteId)
+        fetch("http://localhost:8087/java/GoMyNote/" + this.noteId)
             .then(result => result.json())
             .then(result => {
                 this.title = result.title;

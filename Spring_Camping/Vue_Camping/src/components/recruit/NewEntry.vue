@@ -20,7 +20,7 @@
             loadSaveData: function () {
                 const recruId = this.recruId;
                 const component = this;
-                fetch(`http://13.125.95.210:85/java/recru/entry/${recruId}`)
+                fetch(`http://localhost:8087/java/recru/entry/${recruId}`)
                     .then(result => result.json())
                     .then(result => {
                     component.entryList = result 

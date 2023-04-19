@@ -2,7 +2,7 @@
     <div class="entry-card-box ">
         <div class="entry-card-row row">
             <div class="entry-card-img col">
-              <img :src="'http://13.125.95.210:85/java/profile/'+storedProfile.imagePath+'/'+storedProfile.storedName">
+              <img :src="'http://localhost:8087/java/profile/'+storedProfile.imagePath+'/'+storedProfile.storedName">
             </div>
             <div class="entry-card-info col">
                 <div class="entry-card-contents">
@@ -27,13 +27,13 @@
           },
           created(){
               var email = this.entryCard.memberId;
-              fetch('http://13.125.95.210:85/java/member/' +email)
+              fetch('http://localhost:8087/java/member/' +email)
                   .then(result => result.json())
                   .then(result => {
                       this.user = result;
                   }).catch(err => console.log(err));
   
-                  fetch('http://13.125.95.210:85/java/profile/' + email)
+                  fetch('http://localhost:8087/java/profile/' + email)
                   .then(result => result.json())
                   .then(result => {
                       this.storedProfile = result;

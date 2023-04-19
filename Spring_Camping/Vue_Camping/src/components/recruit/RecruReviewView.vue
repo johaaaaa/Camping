@@ -63,7 +63,7 @@
       loadData : function(){
         var recruId = this.recruId;
         //게시글 정보 
-        fetch(`http://13.125.95.210:85/java/recru/${recruId}`)
+        fetch(`http://localhost:8087/java/recru/${recruId}`)
         .then((response) =>response.json()) 
         .then(data => { 
             console.log(data);
@@ -71,7 +71,7 @@
         }).catch(err=>console.log(err));
         //모임 참여자 정보
         var memberId = this.$store.state.email;
-        fetch(`http://13.125.95.210:85/java/recru/members/${recruId}/${memberId}`)
+        fetch(`http://localhost:8087/java/recru/members/${recruId}/${memberId}`)
         .then((response) =>response.json()) 
         .then(data => { 
             this.recruMember = data;  
@@ -109,7 +109,7 @@
           confirmButtonText: '확인', // confirm 버튼 텍스트 지정
           })
         }else{
-            fetch('http://13.125.95.210:85/java/recru/review',{
+            fetch('http://localhost:8087/java/recru/review',{
                     method : "POST",
                     headers : { },
                     body : fetchData

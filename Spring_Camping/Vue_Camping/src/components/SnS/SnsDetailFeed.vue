@@ -13,7 +13,7 @@
         <div class="sns-write-form-id">
           <div class="sns-write-id">
             <img
-              :src="'http://13.125.95.210:85/java/profile/' + storedProfile.imagePath + '/' + storedProfile.storedName"
+              :src="'http://localhost:8087/java/profile/' + storedProfile.imagePath + '/' + storedProfile.storedName"
               @click="getSnsNickFeed(snsItem.nickname)">
             <!--프로필 이미지로 바꾸기 -->
           </div>
@@ -51,7 +51,7 @@
               <swiper-slide v-for="snsImg of snsImgs">
                 <input type="text" :value="snsImg.writeNo" style="display :none;" readonly>
                 <img
-                  v-bind:src="'http://13.125.95.210:85/java/showSnsImage/' + snsImg.snsPath + '/' + snsImg.storedName">
+                  v-bind:src="'http://localhost:8087/java/showSnsImage/' + snsImg.snsPath + '/' + snsImg.storedName">
               </swiper-slide>
             </swiper>
           </div>
@@ -107,7 +107,7 @@
               <div class="sns-comment-write-id-container">
                 <div class="sns-comment-write-id">
                   <img
-                    :src="'http://13.125.95.210:85/java/profile/' + snsCommentItem.profile.imagePath + '/' + snsCommentItem.profile.storedName"
+                    :src="'http://localhost:8087/java/profile/' + snsCommentItem.profile.imagePath + '/' + snsCommentItem.profile.storedName"
                     @click="getSnsNickFeed(snsCommentItem.nickname)">
                   <input type="text" :value="snsCommentItem.email" style="display :none;" readonly>
                 </div>
@@ -196,7 +196,7 @@ export default {
     };
   },
   created: function () {
-    fetch('http://13.125.95.210:85/java/snsDetail/' + this.writeNo)
+    fetch('http://localhost:8087/java/snsDetail/' + this.writeNo)
       .then(response => response.json())
       .then(result => {
         this.snsItem = result
@@ -209,7 +209,7 @@ export default {
         }
         this.snsItem.hashtag = tempArr;
         //프로필 이미지
-        fetch('http://13.125.95.210:85/java/profile/' + this.snsItem.email)
+        fetch('http://localhost:8087/java/profile/' + this.snsItem.email)
           .then(result => result.json())
           .then(result => {
             this.storedProfile = result;
@@ -219,7 +219,7 @@ export default {
       .catch(err => console.log(err));
 
     //게시글 이미지 출력
-    fetch('http://13.125.95.210:85/java/snsImage/' + this.writeNo)
+    fetch('http://localhost:8087/java/snsImage/' + this.writeNo)
       .then(response => response.json())
       .then(result => {
         this.snsImgs = result
@@ -228,7 +228,7 @@ export default {
     //서버에서 제대로 받아왔는지 확인.
 
     //게시글 별 댓글 출력
-    fetch('http://13.125.95.210:85/java/snsComment/' + this.writeNo)
+    fetch('http://localhost:8087/java/snsComment/' + this.writeNo)
       .then(response => response.json())
       .then(result => {
         // console.log(result);
@@ -239,7 +239,7 @@ export default {
           let emails = this.snsCommentItems[i].email;
           //댓글프로필이미지
           //프로필 이미지
-          fetch('http://13.125.95.210:85/java/profile/' + emails)
+          fetch('http://localhost:8087/java/profile/' + emails)
             .then(result => result.json())
             .then(result => {
               //객체 안에 객체 추가 snsCommentItems에 profile라는 이름으로 객체 추가된것임...짱신기
@@ -256,7 +256,7 @@ export default {
 
     //좋아요 상태 가져오기..
     if (this.$store.state.email != null) {
-      fetch('http://13.125.95.210:85/java/save?boardId=' + this.writeNo + '&email=' + this.$store.state.email + '&boardDivision=3')
+      fetch('http://localhost:8087/java/save?boardId=' + this.writeNo + '&email=' + this.$store.state.email + '&boardDivision=3')
         .then(result => result.text())
         .then(result => {
           if (result == 'true') {
@@ -269,7 +269,7 @@ export default {
     }
 
     // 게시글의 좋아요 총 게시글 숫자 표시
-    fetch('http://13.125.95.210:85/java/memberLikeWriteNoCount/' + this.writeNo)
+    fetch('http://localhost:8087/java/memberLikeWriteNoCount/' + this.writeNo)
       .then(response => response.text())
       .then(result => {
         console.log(result);
@@ -281,7 +281,7 @@ export default {
 
     //닉네임검색일단쌔벼옴
     //닉네임 검색... 왜안되ㅈ는지....그지같음...
-    fetch('http://13.125.95.210:85/java/snsnickname')
+    fetch('http://localhost:8087/java/snsnickname')
       .then(result => result.text())
       .then(result => result.substring(2, result.length - 2))
       .then(result => result.replaceAll('","', ' '))
@@ -355,7 +355,7 @@ export default {
       }
       // console.log(like);
       if (this.$store.state.email != null) {
-        fetch('http://13.125.95.210:85/java/save', {
+        fetch('http://localhost:8087/java/save', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -404,7 +404,7 @@ export default {
         boardDivision: boardDivision,
         email: email
       }
-      fetch('http://13.125.95.210:85/java/save', {
+      fetch('http://localhost:8087/java/save', {
         method: 'DELETE',
         headers: {
           'Content-Type': 'application/json'
@@ -470,7 +470,7 @@ export default {
     getUpdate() {
       this.$router.push({ name: 'SnsRewrite', params: { writeNo: this.snsItem.writeNo } });
       // console.log('글을 수정하겟음')
-      // fetch('http://13.125.95.210:85/java/snsUpdate')
+      // fetch('http://localhost:8087/java/snsUpdate')
       // console.log(result)
       //   .then(result => console.log(result))
 
@@ -498,7 +498,7 @@ export default {
       }).then(result => {
 
         if (result.isConfirmed) {
-          fetch('http://13.125.95.210:85/java/snsDelete?writeNo=' + snsInfo.writeNo, {
+          fetch('http://localhost:8087/java/snsDelete?writeNo=' + snsInfo.writeNo, {
             method: 'DELETE',
             headers: {
               'Content-Type': 'application/json'
@@ -535,7 +535,7 @@ export default {
 
         if (result.isConfirmed) {
 
-          fetch('http://13.125.95.210:85/java/snsDeleteByAdmin?writeNo=' + this.writeNo, {
+          fetch('http://localhost:8087/java/snsDeleteByAdmin?writeNo=' + this.writeNo, {
             method: 'DELETE'
           }).then(result => result.text())
             .then(result => {
@@ -578,7 +578,7 @@ export default {
       }
       console.log(comment);
       if (this.$store.state.email != null) {
-        fetch('http://13.125.95.210:85/java/comment', {
+        fetch('http://localhost:8087/java/comment', {
           method: 'POST',
           headers: {
             'Content-Type': 'application/json'
@@ -742,7 +742,7 @@ export default {
           }
 
           console.log(fetchData);
-          fetch('http://13.125.95.210:85/java/report', {
+          fetch('http://localhost:8087/java/report', {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json'

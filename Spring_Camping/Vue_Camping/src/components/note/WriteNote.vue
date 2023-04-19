@@ -235,7 +235,7 @@ export default {
             formData.append("email", this.$store.state.email);
             formData.forEach((value, key) => {
             })
-           fetch('http://13.125.95.210:85/java/WriteNoteInfo', {
+           fetch('http://localhost:8087/java/WriteNoteInfo', {
                 method: 'POST',
                 headers: {},
                 body: formData

@@ -52,14 +52,14 @@ export default {
     };
   },
   created: function () {
-    fetch("http://13.125.95.210:85/java/camp/" + this.page)
+    fetch("http://localhost:8087/java/camp/" + this.page)
       .then(result => result.json())
       .then(result => {
         this.camps = this.campInfoProcess(result);
         console.log(this.camps);
       })
       .catch(err => console.log(err));
-    fetch("http://13.125.95.210:85/java/camp/endPage")
+    fetch("http://localhost:8087/java/camp/endPage")
       .then(result => result.text())
       .then(result => {
         this.endPage = +result;
@@ -111,7 +111,7 @@ export default {
     },
     getPageItem() {
       this.page++;
-      fetch("http://13.125.95.210:85/java/camp/" + this.page)
+      fetch("http://localhost:8087/java/camp/" + this.page)
         .then(result => result.json())
         .then(result => {
           for (let i = 0; i < result.length; i++) {

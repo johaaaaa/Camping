@@ -9,7 +9,7 @@
       <div class="sns-img-row-container" :key="snsImg.writeNo" v-for="snsImg of snsImgs" @click="getSnsDetail(snsImg.writeNo)">
         <div class="sns-img">
           <input type="text" :value="snsImg.writeNo" style="display :none;">
-          <img :src="'http://13.125.95.210:85/java/showSnsImage/'+snsImg.snsPath+'/'+snsImg.storedName">
+          <img :src="'http://localhost:8087/java/showSnsImage/'+snsImg.snsPath+'/'+snsImg.storedName">
           <!-- <img v-bind:src="snsImg.Img"> -->
         </div>
       </div>
@@ -32,7 +32,7 @@ export default {
     if(this.hashtag != undefined && this.hashtag != 'undefined'){
       this.showHashList(this.hashtag);
     }else{
-      fetch('http://13.125.95.210:85/java/sns/' + this.page)
+      fetch('http://localhost:8087/java/sns/' + this.page)
       .then(result => result.json())
       .then(result => {
         this.snsImgs = result;
@@ -59,8 +59,8 @@ export default {
       let hash = hashtag.substring(1, hashtag.length);
       this.$refs.sSearch.setTag(hashtag);
 
-      console.log('http://13.125.95.210:85/java/hashtagList/' + hash + "/" +this.page);
-        fetch('http://13.125.95.210:85/java/hashtagList/' + hash + "/" +this.page)
+      console.log('http://localhost:8087/java/hashtagList/' + hash + "/" +this.page);
+        fetch('http://localhost:8087/java/hashtagList/' + hash + "/" +this.page)
         .then(result => result.json())
         .then(result => {
           console.log(result);

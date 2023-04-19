@@ -135,12 +135,12 @@ export default {
         }
     },
     created: function () {
-        fetch('http://13.125.95.210:85/java/campDetail/' + this.campId)
+        fetch('http://localhost:8087/java/campDetail/' + this.campId)
             .then(result => result.json())
             .then(result => {
                 result.campInfo = result.campInfo.split(" ");
                 this.camp = result;
-                fetch("http://13.125.95.210:85/java/hashtagList/" + this.camp.campName.substring(0,this.camp.campName.length-4) + "/" + this.page)
+                fetch("http://localhost:8087/java/hashtagList/" + this.camp.campName.substring(0,this.camp.campName.length-4) + "/" + this.page)
                     .then(result => result.json())
                     .then(result => {
                         this.snsImgs = result;
@@ -148,7 +148,7 @@ export default {
                     .catch(err => console.log(err));
             }).catch(err => console.log(err));
         if (this.$store.state.email != null) {
-            fetch('http://13.125.95.210:85/java/save?boardId=' + this.campId + '&email=' + this.$store.state.email)
+            fetch('http://localhost:8087/java/save?boardId=' + this.campId + '&email=' + this.$store.state.email)
                 .then(result => result.text())
                 .then(result => {
                     if (result == 'true') {
@@ -171,7 +171,7 @@ export default {
                 email: this.$store.state.email
             }
             if (this.$store.state.email != null) {
-                fetch('http://13.125.95.210:85/java/save', {
+                fetch('http://localhost:8087/java/save', {
                     method: 'POST',
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify(save)
@@ -190,7 +190,7 @@ export default {
                 'boardDivision': 0,
                 'email': this.$store.state.email
             }
-            fetch('http://13.125.95.210:85/java/save', {
+            fetch('http://localhost:8087/java/save', {
                 method: 'DELETE',
                 headers: { "Content-Type": "application/json" },
                 body: JSON.stringify(save)
@@ -207,7 +207,7 @@ export default {
         },
         modifyItemByUser() {
             if (this.$store.state.email != null) {
-                fetch('http://13.125.95.210:85/java/campModify/' + this.campId)
+                fetch('http://localhost:8087/java/campModify/' + this.campId)
                     .then(result => result.text())
                     .then(result => {
                         if (result == 'true')    // 수정중인게 있을때
@@ -246,7 +246,7 @@ export default {
             }
         },
         modifyItemByAdmin() {
-            fetch('http://13.125.95.210:85/java/campModify/' + this.campId)
+            fetch('http://localhost:8087/java/campModify/' + this.campId)
                 .then(result => result.text())
                 .then(result => {
                     if (result == 'true')    // 수정중인게 있을때
@@ -292,7 +292,7 @@ export default {
                     }
 
                     console.log(fetchData);
-                    fetch('http://13.125.95.210:85/java/report', {
+                    fetch('http://localhost:8087/java/report', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json'

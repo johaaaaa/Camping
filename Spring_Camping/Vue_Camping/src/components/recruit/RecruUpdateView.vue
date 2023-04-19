@@ -55,7 +55,7 @@
                         <div class="recru-show-image-box" v-for="image of images">
                             <div v-if="image.imageId!=0">
                                 <p class="existing-img">{{image.originName}}</p>
-                                <img class="show-image" :src="'http://13.125.95.210:85/java/recruImg/'+image.imgPath+'/'+image.storedName">
+                                <img class="show-image" :src="'http://localhost:8087/java/recruImg/'+image.imgPath+'/'+image.storedName">
                                 <img class="delete-image" src="@/assets/img/icons/close.png" @click="deleteImg">
                             </div>
                         </div>    
@@ -198,7 +198,7 @@ export default{
             // 서버에서 단건조회
             let recruId = this.recruId;
             let component = this;
-            fetch("http://13.125.95.210:85/java/recru/"+recruId)
+            fetch("http://localhost:8087/java/recru/"+recruId)
             .then((response) =>response.json()) 
             .then(data => { 
                 component.recruInfo = data;  
@@ -244,7 +244,7 @@ export default{
 
             //나의 노트 정보 가져오기
             const email = this.$store.state.email;
-            fetch(`http://13.125.95.210:85/java/MyNoteList/${email}`) 
+            fetch(`http://localhost:8087/java/MyNoteList/${email}`) 
                 .then(Response => Response.json())  
                 .then(data => { 
                     this.myNote = data;
@@ -255,7 +255,7 @@ export default{
         loadImgs: function () {
             const recruId = this.recruId;
             const component = this;
-            fetch("http://13.125.95.210:85/java/recruImg/" + recruId)
+            fetch("http://localhost:8087/java/recruImg/" + recruId)
                 .then(result => result.json())
                 .then(result => {
                 component.images=result;
@@ -341,7 +341,7 @@ export default{
             console.log(recruVO);
 
             //서버를 통해 게시글 내용 insert
-            fetch('http://13.125.95.210:85/java/recru/updateAll',{
+            fetch('http://localhost:8087/java/recru/updateAll',{
                 method : "PUT",
                 headers : {"Content-Type" : "application/json"},
                 body : JSON.stringify(recruVO )
@@ -387,7 +387,7 @@ export default{
             }
             formData.append('recruId', this.recruId);
         
-            fetch('http://13.125.95.210:85/java/recruImg/update',{
+            fetch('http://localhost:8087/java/recruImg/update',{
                     method : "POST",
                     headers :{},
                     body : formData
@@ -504,7 +504,7 @@ export default{
             var regionInfo = {
                     campName : campName
                 }
-                fetch(`http://13.125.95.210:85/java/recru/campingPoint`,{
+                fetch(`http://localhost:8087/java/recru/campingPoint`,{
                 method : "POST",
                 headers : {"Content-Type" : "application/json"},
                 body : JSON.stringify(regionInfo)

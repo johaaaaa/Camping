@@ -79,7 +79,7 @@ methods: {
     //읽음처리
     let fetchData = {}
     fetchData["mailId"] = mail.mailId;
-    fetch('http://13.125.95.210:85/java/mail/updateMail', {
+    fetch('http://localhost:8087/java/mail/updateMail', {
             method: "PUT",
             // body : fetchData
             headers: { "Content-Type": "application/json" },
@@ -117,7 +117,7 @@ methods: {
           }
 
           console.log(fetchData);
-          fetch('http://13.125.95.210:85/java/mail/sendMail', {
+          fetch('http://localhost:8087/java/mail/sendMail', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(fetchData)
@@ -175,7 +175,7 @@ methods: {
   updateMail: function(){
     let fetchData = {}
     fetchData["mailId"] = this.rcvMailList.mailId;
-    fetch('http://13.125.95.210:85/java/mail/updateMail', {
+    fetch('http://localhost:8087/java/mail/updateMail', {
             method: "PUT",
             // body : fetchData
             headers: { "Content-Type": "application/json" },
@@ -211,7 +211,7 @@ sendMail: function(){
           }
 
           console.log(fetchData);
-          fetch('http://13.125.95.210:85/java/mail/sendMail', {
+          fetch('http://localhost:8087/java/mail/sendMail', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(fetchData)
@@ -264,7 +264,7 @@ deleteMail: function(mail){
           let fetchData = {}
           fetchData["mailId"] = mail.mailId;
           console.log(fetchData);
-          fetch('http://13.125.95.210:85/java/mail/deleteMail', {
+          fetch('http://localhost:8087/java/mail/deleteMail', {
             method: 'PUT',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(fetchData)
@@ -306,7 +306,7 @@ deleteMail: function(mail){
 },
 created(){
       //받은 쪽지
-      fetch('http://13.125.95.210:85/java/mail/receivedMail/'+this.$store.state.email) 
+      fetch('http://localhost:8087/java/mail/receivedMail/'+this.$store.state.email) 
               .then(Response => Response.json())  //json 파싱 
               .then(data => { 
                   this.rcvMailList = data;  
@@ -314,7 +314,7 @@ created(){
                 
                
       //보낸 쪽지
-      fetch('http://13.125.95.210:85/java/mail/sendedMail/'+this.$store.state.email) 
+      fetch('http://localhost:8087/java/mail/sendedMail/'+this.$store.state.email) 
       .then(Response => Response.json())  //json 파싱 
       .then(data => { 
           this.sendMailList = data;  

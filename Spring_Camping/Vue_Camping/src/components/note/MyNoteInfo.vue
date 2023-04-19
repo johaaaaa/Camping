@@ -142,7 +142,7 @@ export default {
     created() {
         window.scrollTo(0,0);
         // this.noteId = this.$router.params.myNoteId;
-        fetch("http://13.125.95.210:85/java/GoMyNote/" + this.noteId)
+        fetch("http://localhost:8087/java/GoMyNote/" + this.noteId)
             .then(result => result.json())
             .then(result => {
                 this.title = result.title;
@@ -385,7 +385,7 @@ export default {
                 console.log(key + " : ", value);
             })
 
-            fetch('http://13.125.95.210:85/java/UpdateNoteInfo', {
+            fetch('http://localhost:8087/java/UpdateNoteInfo', {
                 method: 'POST',
                 headers: {},
                 body: formData

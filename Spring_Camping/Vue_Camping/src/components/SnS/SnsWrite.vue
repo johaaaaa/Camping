@@ -27,7 +27,7 @@
           <div class="sns-write-form-id-form">
             <div class="sns-write-form-id">
               <div class="sns-write-id">
-                <img :src="'http://13.125.95.210:85/java/profile/'+storedProfile.imagePath+'/'+storedProfile.storedName">
+                <img :src="'http://localhost:8087/java/profile/'+storedProfile.imagePath+'/'+storedProfile.storedName">
               </div>
             </div>
             <div class="sns-write-form-id">
@@ -100,7 +100,7 @@ export default {
     // });
 
     //프로필 이미지
-    fetch('http://13.125.95.210:85/java/profile/' + this.$store.state.email)
+    fetch('http://localhost:8087/java/profile/' + this.$store.state.email)
       .then(result => result.json())
       .then(result => {
         this.storedProfile = result;
@@ -126,7 +126,7 @@ export default {
       sns.forEach((value, key) => {
         console.log(value);
       })
-      fetch('http://13.125.95.210:85/java/sns', {
+      fetch('http://localhost:8087/java/sns', {
         method: 'POST',
         headers: {},
         body: sns

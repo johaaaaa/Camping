@@ -82,7 +82,7 @@ export default {
         getInvitedListInfo() {
             const email = this.$store.state.email;
             console.log(email);
-            fetch(`http://13.125.95.210:85/java/invitedList/${email}`, {
+            fetch(`http://localhost:8087/java/invitedList/${email}`, {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
             })
@@ -128,7 +128,7 @@ export default {
                     let fetchData = {
                         "noteIds": noteIds
                     }
-                    fetch(`http://13.125.95.210:85/java/MyNoteList`, {
+                    fetch(`http://localhost:8087/java/MyNoteList`, {
                         method: "DELETE",
                         headers: { "Content-Type": "application/json" },
                         body: JSON.stringify(fetchData)
@@ -179,7 +179,7 @@ export default {
             }
             console.log("-----------fetch")
             console.log(fetchData)
-            fetch('http://13.125.95.210:85/java/inviteUser', {
+            fetch('http://localhost:8087/java/inviteUser', {
                 method: 'PUT',
                 mode: 'cors',
                 headers: { "Content-Type": "application/json" },

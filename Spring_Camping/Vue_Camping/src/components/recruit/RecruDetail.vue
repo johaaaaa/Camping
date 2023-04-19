@@ -22,7 +22,7 @@
                 <div class="recru-detail-col" style="margin-top : 30px">
                     
                     <div class="recru-detail-user">
-                        <img :src="'http://13.125.95.210:85/java/profile/'+storedProfile.imagePath+'/'+storedProfile.storedName"  name="profile_img" alt="profile img">
+                        <img :src="'http://localhost:8087/java/profile/'+storedProfile.imagePath+'/'+storedProfile.storedName"  name="profile_img" alt="profile img">
                         <p><span>{{recruPost.nickname}}</span></p>
                         <p>{{yyyyMMddhhmmss(recruPost.writeDate) }}</p>
                         <button class="report-btn" @click="reportItem">🚨신고</button>
@@ -257,14 +257,14 @@ export default{
             // 서버에서 단건조회
             let recruId = this.recruId;
             let component = this;
-            fetch("http://13.125.95.210:85/java/recru/"+recruId)
+            fetch("http://localhost:8087/java/recru/"+recruId)
             .then((response) =>response.json()) 
             .then(data => { 
                 component.recruPost = data;  
                 console.log(component.recruPost);
 
                 //프로필 이미지 가져오기
-                fetch('http://13.125.95.210:85/java/profile/' + component.recruPost.memberId)
+                fetch('http://localhost:8087/java/profile/' + component.recruPost.memberId)
                 .then(result => result.json())
                 .then(result => {
                     component.storedProfile = result;
@@ -274,7 +274,7 @@ export default{
                 var regionInfo = {
                     campAddress : component.recruPost.campingPoint
                 }
-                fetch(`http://13.125.95.210:85/java/recru/campingPoint`,{
+                fetch(`http://localhost:8087/java/recru/campingPoint`,{
                 method : "POST",
                 headers : {"Content-Type" : "application/json"},
                 body : JSON.stringify(regionInfo)
@@ -288,7 +288,7 @@ export default{
                 //서버에서 모집글에 대한 참가목록 조회
                 let recruId = 0;
                 recruId = this.recruId;
-                fetch("http://13.125.95.210:85/java/recru/entry/"+recruId)
+                fetch("http://localhost:8087/java/recru/entry/"+recruId)
                 .then((response) =>response.json()) 
                 .then(data => { 
                     component.entryPost = data;  
@@ -360,7 +360,7 @@ export default{
                         component.sendRecruInfo.recruId = component.recruId;
                         component.sendRecruInfo.memberId = component.memberId;
                         component.sendRecruInfo.recruStatus = 1;
-                        fetch('http://13.125.95.210:85/java/recru',{
+                        fetch('http://localhost:8087/java/recru',{
                             method : "PUT",
                             headers : {"Content-Type" : "application/json"},
                             body :  JSON.stringify(component.sendRecruInfo)
@@ -424,7 +424,7 @@ export default{
                         }
 
                         console.log(fetchData);
-                        fetch('http://13.125.95.210:85/java/report', {
+                        fetch('http://localhost:8087/java/report', {
                             method: 'POST',
                             headers: {'Content-Type': 'application/json' },
                             body: JSON.stringify(fetchData)
@@ -518,7 +518,7 @@ export default{
                 status : status
             };
             console.log(changeInfo)
-            fetch('http://13.125.95.210:85/java/recru/showStatus', {
+            fetch('http://localhost:8087/java/recru/showStatus', {
                 method : "PUT",
                 headers : {"Content-Type" : "application/json"},
                 body :  JSON.stringify(changeInfo)
@@ -586,8 +586,8 @@ export default{
                 imageUrl:
                     'https://ifh.cc/g/dTGkp9.jpg',
                 link: {
-                    mobileWebUrl: 'http://13.125.95.210:85/RecruList',
-                    webUrl: 'http://13.125.95.210:85/RecruList',
+                    mobileWebUrl: 'http://localhost:8087/RecruList',
+                    webUrl: 'http://localhost:8087/RecruList',
                 },
                 },
                 
@@ -600,15 +600,15 @@ export default{
                 {
                     title: '캠핑갈래 홈',
                     link: {
-                    mobileWebUrl: 'http://13.125.95.210:85',
-                    webUrl: 'http://13.125.95.210:85',
+                    mobileWebUrl: 'http://localhost:8087',
+                    webUrl: 'http://localhost:8087',
                     },
                 },
                 {
                     title: '페이지 이동',
                     link: {
-                    mobileWebUrl: 'http://13.125.95.210:85/recru/detail/'+num,
-                    webUrl: 'http://13.125.95.210:85/recru/detail/'+num,
+                    mobileWebUrl: 'http://localhost:8087/recru/detail/'+num,
+                    webUrl: 'http://localhost:8087/recru/detail/'+num,
                     },
                 },
                 ],

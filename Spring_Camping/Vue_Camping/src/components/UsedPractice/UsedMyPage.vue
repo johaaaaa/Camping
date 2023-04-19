@@ -93,7 +93,7 @@
         email = this.email;
       }
       //내가쓴글전체조회
-      fetch("http://13.125.95.210:85/java/used/myUsed/"+email,{
+      fetch("http://localhost:8087/java/used/myUsed/"+email,{
         method: "POST",
         headers : {"Content-Type" : "application/json"},
         body : JSON.stringify(email)

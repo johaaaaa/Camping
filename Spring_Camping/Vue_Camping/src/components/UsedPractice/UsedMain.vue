@@ -286,7 +286,7 @@ export default {
       }
       const keyword = this.keyword;
       this.keywordValue = keyword;
-      fetch("http://13.125.95.210:85/java/used/usedSearch", {
+      fetch("http://localhost:8087/java/used/usedSearch", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)
@@ -331,7 +331,7 @@ export default {
       })
     },
     loadDataPage: function () {
-      fetch('http://13.125.95.210:85/java/used/usedMain/' + this.pageNum)
+      fetch('http://localhost:8087/java/used/usedMain/' + this.pageNum)
         .then(Response => Response.json())  //json 파싱 
         .then(data => {
           for (let key in data) {
@@ -346,7 +346,7 @@ export default {
       let data = {
         keyword: this.$route.query.search,
       }
-      fetch("http://13.125.95.210:85/java/used/usedSearch", {
+      fetch("http://localhost:8087/java/used/usedSearch", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(data)

@@ -29,7 +29,7 @@
         <div class="sns-cards">
           <div class="sns-card" v-for="snsImg of snsImgs" @click="clickSnsCard(snsImg.writeNo)">
             <input type="text" :value="snsImg.writeNo" style="display :none;">
-            <img :src="'http://13.125.95.210:85/java/showSnsImage/' + snsImg.snsPath + '/' + snsImg.storedName">
+            <img :src="'http://localhost:8087/java/showSnsImage/' + snsImg.snsPath + '/' + snsImg.storedName">
           </div>
         </div>
       </div>
@@ -51,7 +51,7 @@ export default {
     };
   },
   created: function () {
-    fetch(`http://13.125.95.210:85/java/recru/page/3/1`)
+    fetch(`http://localhost:8087/java/recru/page/3/1`)
       .then((response) => response.json())
       .then(data => {
         for (let key in data) {
@@ -60,7 +60,7 @@ export default {
       }).catch(err => console.log(err));
 
     // 중고
-    fetch('http://13.125.95.210:85/java/used/usedMain/1')
+    fetch('http://localhost:8087/java/used/usedMain/1')
       .then(Response => Response.json())  //json 파싱 
       .then(data => {
         for (let key in data) {
@@ -70,7 +70,7 @@ export default {
       }).catch(err => console.log(err))
 
     // SNS
-    fetch('http://13.125.95.210:85/java/sns/1')
+    fetch('http://localhost:8087/java/sns/1')
       .then(result => result.json())
       .then(result => {
 
