@@ -1,6 +1,6 @@
 <template>
     <div>
-        <div class="main-title">오늘은 어디로 떠나볼까?</div>
+        <div class="main-title">오늘은 어디로 떠나볼까??</div>
         <div class="search-top">
             <div class="select-container">
                 <select class="search-select">

@@ -42,7 +42,7 @@ import com.camp.app.used.service.UsedVO;
 public class UsedController {
 //	private String imagePath = "/home/upload/used/";
 //	private String imagePath = "d:\\upload\\used\\";
-	private String imagePath = "c:\\upload\\used\\";
+	private String imagePath = "c:\\dev\\upload\\used\\";
 	
 	@Autowired
 	UsedService service;
@@ -151,7 +151,11 @@ public class UsedController {
 		
 		if(!resource.exists()) {
 			System.out.println("File Not Found ! ");
-			return new ResponseEntity<Resource>(HttpStatus.NOT_FOUND);
+			fullPath = "/upload/default.png";
+			resource = new FileSystemResource(fullPath);
+			if(!resource.exists()) {
+				return new ResponseEntity<Resource>(HttpStatus.NOT_FOUND);
+			}
 		}
 		
 		HttpHeaders header = new HttpHeaders();
