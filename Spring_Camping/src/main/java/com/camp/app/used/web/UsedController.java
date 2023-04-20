@@ -40,9 +40,9 @@ import com.camp.app.used.service.UsedVO;
 @RestController
 @RequestMapping("/java/used")
 public class UsedController {
-	private String imagePath = "/home/upload/used/";
+//	private String imagePath = "/home/upload/used/";
 //	private String imagePath = "d:\\upload\\used\\";
-	
+	private String imagePath = "c:\\upload\\used\\";
 	
 	@Autowired
 	UsedService service;

@@ -12,6 +12,7 @@
                 <swiper-slide><img src="@/assets/img/bg10.png" alt="텐트 중고거래 광고" /></swiper-slide>
                 <swiper-slide><img src="@/assets/img/bg11.png" alt="의자 중고거래 광고" /></swiper-slide>
               </swiper> -->
+              하하
               <swiper :autoplay="{ delay:1000, disableOnInteraction:false }" :navigation="false" :pagination="{ clickable: false, }" :modules="modules" class="mySwiper">
                 <swiper-slide>
                   <img src="@/assets/img/used/ad3.png" alt="텐트 중고거래 광고">
@@ -43,7 +44,7 @@
 
             <div class="used-searchbox">
               <div>
-                <input type="text" name="search" placeholder="어떤 물건을 찾으시나요??" v-model="keyword"
+                <input type="text" name="search" placeholder="어떤 물건을 찾으시나요??????" v-model="keyword"
                   @keyup.enter="searchList()">
                 <img v-bind:src="searchImg" @click='searchList'>
               </div>
