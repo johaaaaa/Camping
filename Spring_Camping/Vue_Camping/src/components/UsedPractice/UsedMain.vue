@@ -12,7 +12,6 @@
                 <swiper-slide><img src="@/assets/img/bg10.png" alt="텐트 중고거래 광고" /></swiper-slide>
                 <swiper-slide><img src="@/assets/img/bg11.png" alt="의자 중고거래 광고" /></swiper-slide>
               </swiper> -->
-              하하
               <swiper :autoplay="{ delay:1000, disableOnInteraction:false }" :navigation="false" :pagination="{ clickable: false, }" :modules="modules" class="mySwiper">
                 <swiper-slide>
                   <img src="@/assets/img/used/ad3.png" alt="텐트 중고거래 광고">
@@ -259,7 +258,7 @@ export default {
       let sidoName = sido.value;
       let cityArr = ["서울", "부산", "인천", "대구", "광주", "대전", "울산", "경기", "강원", "충북", "충남", "경북", "경남", "전북", "전남", "제주특별자치도"];
 
-      sigu.options.length = 1;  //저장내역 삭제
+      sigu.options.length = 1;  //저장내역 삭제 -- 왜삭제하지?
 
       let cityIndex = cityArr.indexOf(sidoName);
 
