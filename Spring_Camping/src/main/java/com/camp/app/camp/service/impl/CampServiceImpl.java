@@ -26,8 +26,10 @@ import com.camp.app.save.service.SaveVO;
 
 @Service
 public class CampServiceImpl implements CampService{
-	private String imagePath = "/home/upload/camp/";
+//	private String imagePath = "/home/upload/camp/";
 //	private String imagePath = "d:\\upload\\camp\\";
+	private String imagePath = "c:\\dev\\upload\\camp\\";
+
 	@Autowired
 	CampMapper mapper;
 	@Autowired

@@ -29,8 +29,8 @@ import com.camp.app.recru.service.RecruService;
 @RequestMapping("/java")
 @RestController
 public class RecruImgController {
-	private String imagePath = "/home/upload/recru/";
-//	private String imagePath = "d:\\upload\\recru\\";
+//	private String imagePath = "/home/upload/recru/";
+	private String imagePath = "c:\\dev\\upload\\recru\\";
 	
 	@Autowired
 	RecruImgService imgService;

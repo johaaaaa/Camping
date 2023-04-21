@@ -26,8 +26,8 @@ import com.camp.app.sns.service.SnsVO;
 
 @Service
 public class SnsServiceImpl implements SnsService {
-	private String imagePath = "/home/upload/sns/";
-//	private String imagePath = "d:\\upload\\sns\\";
+	//private String imagePath = "/home/upload/sns/";
+	private String imagePath = "c:\\dev\\upload\\sns\\";
 
 	@Autowired
 	SnsMapper mapper;

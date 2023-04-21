@@ -18,8 +18,8 @@ import com.camp.app.recru.service.RecruImgVO;
 
 @Service
 public class RecruImgServiceImpl implements RecruImgService {
-	private String imagePath = "/home/upload/recru/";
-//	private String imagePath = "d:\\upload\\recru\\";
+//	private String imagePath = "/home/upload/recru/";
+	private String imagePath = "c:\\dev\\upload\\recru\\";
 	
 	@Autowired
 	RecruMapper recruMapper;

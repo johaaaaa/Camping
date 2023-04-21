@@ -337,6 +337,11 @@ export default {
           for (let key in data) {
             this.usedList.push(data[key]);
           }
+          if (this.usedList.length < 1) {
+            this.usedMsg = "게시물이 없어요 <br>지금 거래를 시작해보세요 !"
+          } else {
+            this.usedMsg = "";
+          }
           console.log(data);
           // this.usedList = data;
           // this.selectMinUsedPrice();

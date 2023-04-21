@@ -97,80 +97,160 @@ methods: {
             }).catch(err => console.log(err))
     
     //쪽지내용확인
-    let item = Swal.fire({
-        title: '<div class="mail-Title" style="font-size:0.6em; color: green;">'+mail.mailSender+'님이 보낸 쪽지</div>',
-        html: 
-        '<div class="mail-info" style="dislay:flex; border-radius:2px; width:80%; margin: 0 auto; padding: 5px; background-color:#f7f7f7"><div class="mail-usedName"> <span style="font-size:0.8em; color:#54b06d; font-weight:bold;">상품ID </span><span style="font-size:0.9em; font-weight:bold; color: #4a4a4a">'+mail.usedId
-          +'</span></div></div>'+
+      //일반쪽지
+      if(mail.usedId == 0 || mail.usedName == null){
+      let item =Swal.fire({
+          title: '<div class="mail-Title" style="font-size:0.6em; color: green;">'+mail.mailSender+'님이 보낸 쪽지</div>',
+          html: 
+          '<div class="mail-info" style="dislay:flex; border-radius:2px; width:80%; margin: 0 auto; padding: 5px; background-color:#ffffff"><div class="mail-usedName"><span style="font-size:0.9em; font-weight:bold; color: #4a4a4a"></span></div></div>'+
           '<div class="mailContents" style="width:80%; margin: 0 auto; padding: 10px; height:100px; border: 1px solid #e6e6e6; font-size:0.9em;">'+mail.mailContent+'</div><textarea id="swal-input2" class="swal2-textarea" style="resize:none; width:80%; height: 100px; font-size:12px; overflow-y:auto;" maxlength="500" placeholder="답장할 내용을 입력하세요"></textarea>',
-        focusConfirm: false,
-        showCancelButton: true,
-        confirmButtonText: '답장하기',
-        cancelButtonText: '취소',
-        confirmButtonColor: '#54b06d',
-        preConfirm: () => {
-          let fetchData = {
-            "usedId": mail.usedId,
-            "mailSender": this.$store.state.email,
-            "mailReceiver": mail.mailSender,
-            "mailContent": document.getElementById('swal-input2').value,
+          focusConfirm: false,
+          showCancelButton: true,
+          confirmButtonText: '답장하기',
+          cancelButtonText: '취소',
+          confirmButtonColor: '#54b06d',
+          preConfirm: () => {
+            let fetchData = {
+              "usedId": mail.usedId,
+              "usedName": mail.usedName,
+              "mailSender": this.$store.state.email,
+              "mailReceiver": mail.mailSender,
+              "mailContent": document.getElementById('swal-input2').value,
+            }
+
+            console.log(fetchData);
+            fetch('http://localhost:8087/java/mail/sendMail', {
+              method: 'POST',
+              headers: {'Content-Type': 'application/json'},
+              body: JSON.stringify(fetchData)
+            }).then(result => result.text())
+              .then(result => {
+                if (result == "true") {
+                  Swal.fire({
+                    icon: 'success',
+                    title: '전송되었습니다',
+                    toast: true,
+                    showConfirmButton: false,
+                    timer: 900,
+                    didOpen: (toast) => {
+                      toast.addEventListener('mouseenter', Swal.stopTimer)
+                      toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                  })
+                } else {
+                  Swal.fire({
+                    icon: 'error',
+                    title: '전송 실패 !',
+                    text: '계속 실패하면 고객센터에 문의해주세요.',
+                    toast: true,
+                    showConfirmButton: false,
+                    timer: 900,
+                    didOpen: (toast) => {
+                      toast.addEventListener('mouseenter', Swal.stopTimer)
+                      toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                  })
+                }
+                console.log(result);
+              })
+
+            return false;
           }
+        })
+      }
+        //거래쪽지
+        else{
+          Swal.fire({
+          title: '<div class="mail-Title" style="font-size:0.6em; color: green;">[거래] '+mail.mailSender+'님이 보낸 쪽지</div>',
+          html: 
+          '<div class="mail-info" style="dislay:flex; border-radius:2px; width:80%; margin: 0 auto; padding: 5px; background-color:#f7f7f7"><div class="mail-usedName"> <span style="font-size:0.8em; color:#54b06d; font-weight:bold;">상품명 </span><span style="font-size:0.9em; font-weight:bold; color: #4a4a4a">'+mail.usedName
+            +'</span></div></div>'+
+            '<div class="mailContents" style="width:80%; margin: 0 auto; padding: 10px; height:100px; border: 1px solid #e6e6e6; font-size:0.9em;">'+mail.mailContent+'</div><textarea id="swal-input2" class="swal2-textarea" style="resize:none; width:80%; height: 100px; font-size:12px; overflow-y:auto;" maxlength="500" placeholder="답장할 내용을 입력하세요"></textarea>',
+          focusConfirm: false,
+          showCancelButton: true,
+          confirmButtonText: '답장하기',
+          cancelButtonText: '취소',
+          confirmButtonColor: '#54b06d',
+          preConfirm: () => {
+            let fetchData = {
+              "usedId": mail.usedId,
+              "usedName": mail.usedName,
+              "mailSender": this.$store.state.email,
+              "mailReceiver": mail.mailSender,
+              "mailContent": document.getElementById('swal-input2').value,
+            }
 
-          console.log(fetchData);
-          fetch('http://localhost:8087/java/mail/sendMail', {
-            method: 'POST',
-            headers: {'Content-Type': 'application/json'},
-            body: JSON.stringify(fetchData)
-          }).then(result => result.text())
-            .then(result => {
-              if (result == "true") {
-                Swal.fire({
-                  icon: 'success',
-                  title: '전송되었습니다',
-                  toast: true,
-                  showConfirmButton: false,
-                  timer: 900,
-                  didOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                  }
-                })
-              } else {
-                Swal.fire({
-                  icon: 'error',
-                  title: '전송 실패 !',
-                  text: '계속 실패하면 고객센터에 문의해주세요.',
-                  toast: true,
-                  showConfirmButton: false,
-                  timer: 900,
-                  didOpen: (toast) => {
-                    toast.addEventListener('mouseenter', Swal.stopTimer)
-                    toast.addEventListener('mouseleave', Swal.resumeTimer)
-                  }
-                })
-              }
-              console.log(result);
-            })
+            console.log(fetchData);
+            fetch('http://localhost:8087/java/mail/sendMail', {
+              method: 'POST',
+              headers: {'Content-Type': 'application/json'},
+              body: JSON.stringify(fetchData)
+            }).then(result => result.text())
+              .then(result => {
+                if (result == "true") {
+                  Swal.fire({
+                    icon: 'success',
+                    title: '전송되었습니다',
+                    toast: true,
+                    showConfirmButton: false,
+                    timer: 900,
+                    didOpen: (toast) => {
+                      toast.addEventListener('mouseenter', Swal.stopTimer)
+                      toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                  })
+                } else {
+                  Swal.fire({
+                    icon: 'error',
+                    title: '전송 실패 !',
+                    text: '계속 실패하면 고객센터에 문의해주세요.',
+                    toast: true,
+                    showConfirmButton: false,
+                    timer: 900,
+                    didOpen: (toast) => {
+                      toast.addEventListener('mouseenter', Swal.stopTimer)
+                      toast.addEventListener('mouseleave', Swal.resumeTimer)
+                    }
+                  })
+                }
+                console.log(result);
+              })
 
-          return false;
-        }
-      })
-      console.log(item);
+            return false;
+          }
+        })}
+        console.log(item);
     
   },
   mailDetail2: function(mail){
     //쪽지내용확인
-    Swal.fire({
-        title: '<div class="mail-Title" style="font-size:0.6em; color: green;">'+mail.mailReceiver+'님에게 보낸 쪽지</div>',
-        html: 
-        '<div class="mail-info" style="dislay:flex; border-radius:2px; width:80%; margin: 0 auto; padding: 5px; background-color:#f7f7f7"><div class="mail-usedName"> <span style="font-size:0.8em; color:#54b06d; font-weight:bold;">상품ID </span><span style="font-size:0.9em; font-weight:bold; color: #4a4a4a">'+mail.usedId
-          +'</span><span style="font-size:0.9em; font-weight:bold; color: #4a4a4a"></span></div></div>'+
-          '<div class="mailContents" style="width:80%; margin: 0 auto; padding: 10px; height:100px; border: 1px solid #e6e6e6; font-size:0.9em;">'+mail.mailContent+'</div>',
-        showConfirmButton: false,
-        showCancelButton: true,
-        cancelButtonText: '확인',
-        cancelButtonColor: '#54b06d',
-    })
+      //일반쪽지일때 
+      if(mail.usedId == 0 || mail.usedName == null){ 
+      Swal.fire({
+          title: '<div class="mail-Title" style="font-size:0.6em; color: green;">'+mail.mailReceiver+'님에게 보낸 쪽지</div>',
+          html: 
+          '<div class="mail-info" style="dislay:flex; border-radius:2px; width:80%; margin: 0 auto; padding: 5px; background-color:#ffffff"><div class="mail-usedName"> <span style="font-size:0.9em; font-weight:bold; color: #4a4a4a"></span></div></div>'+
+            '<div class="mailContents" style="width:80%; margin: 0 auto; padding: 10px; height:100px; border: 1px solid #e6e6e6; font-size:0.9em;">'+mail.mailContent+'</div>',
+          showConfirmButton: false,
+          showCancelButton: true,
+          cancelButtonText: '확인',
+          cancelButtonColor: '#54b06d',
+      })
+      }
+      //거래쪽지일때
+      else{
+        Swal.fire({
+          title: '<div class="mail-Title" style="font-size:0.6em; color: green;">[거래] '+mail.mailReceiver+'님에게 보낸 쪽지</div>',
+          html: 
+          '<div class="mail-info" style="dislay:flex; border-radius:2px; width:80%; margin: 0 auto; padding: 5px; background-color:#f7f7f7"><div class="mail-usedName"> <span style="font-size:0.8em; color:#54b06d; font-weight:bold;">상품명 </span><span style="font-size:0.9em; font-weight:bold; color: #4a4a4a">'+mail.usedName
+            +'</span><span style="font-size:0.9em; font-weight:bold; color: #4a4a4a"></span></div></div>'+
+            '<div class="mailContents" style="width:80%; margin: 0 auto; padding: 10px; height:100px; border: 1px solid #e6e6e6; font-size:0.9em;">'+mail.mailContent+'</div>',
+          showConfirmButton: false,
+          showCancelButton: true,
+          cancelButtonText: '확인',
+          cancelButtonColor: '#54b06d',
+      })
+      }
   },
   updateMail: function(){
     let fetchData = {}
@@ -303,6 +383,9 @@ deleteMail: function(mail){
         }
       })
 }
+},
+mounted(){
+
 },
 created(){
       //받은 쪽지

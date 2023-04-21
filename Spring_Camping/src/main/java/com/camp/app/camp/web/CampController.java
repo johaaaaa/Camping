@@ -31,8 +31,10 @@ import retrofit2.http.POST;
 @CrossOrigin(origins = "*")
 @RequestMapping("/java")
 public class CampController {
-	private String imagePath = "/home/upload/camp/";
+//	private String imagePath = "/home/upload/camp/";
 //	private String imagePath = "d:\\upload\\member\\";
+	private String imagePath = "c:\\dev\\upload\\camp\\";
+
 	
 	@Autowired
 	CampService service;

@@ -22,7 +22,7 @@ import com.camp.app.used.service.UsedVO;
 public class UsedServiceImpl implements UsedService {
 //	private String imagePath = "/home/upload/used/";
 //	private String imagePath = "d:\\upload\\used\\";
-	private String imagePath = "c:\\upload\\used\\";
+	private String imagePath = "c:\\dev\\upload\\used\\";
 	
 	@Autowired
 	UsedMapper mapper;
